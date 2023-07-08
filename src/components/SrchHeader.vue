@@ -1,18 +1,53 @@
 <script setup>
 import { ref } from 'vue';
+import axios from 'axios';
+
 // 変数宣言
+// 書籍名（入力）
 const shosekiForm = ref('');
+// 作者名（入力）
 const sakushaForm = ref('');
+// API(テスト用)
+const urlTest = 'http://localhost:8010/getTestString';
+// API
+const srchUrl = 'http://localhost:8010/getSrch'
 
 // 検索イベント
 const srchEvent = () => {
+    // requestparameter
+    let requestparam;
     if (shosekiForm.value != null && shosekiForm.value !== '') {
         console.log(shosekiForm.value);
+        requestparam = {
+            shosekiName: shosekiForm.value,
+            sakushaName: '',
+        }
+        console.log(requestparam);
+        axios.get(srchUrl, {requestparam})
+            .then(response => {
+                console.log(response);
+                console.log('レスポンスあり');
+            })
+            .catch(error => {
+                console.log(error);
+                console.log('エラー');
+        })
     } else {
         console.log('書籍空');
     }
     if (sakushaForm.value != null && sakushaForm.value !== '') {
         console.log(sakushaForm.value);
+        requestparam = {
+            shosekiName: '',
+            sakushaName: sakushaForm.value,
+        }
+        axios.get(srchUrl, { requestparam })
+            .then(response => {
+                console.log(response);
+            })
+            .catch(error => {
+                console.log(error);
+            })
     } else {
         console.log('作者空');
     }
