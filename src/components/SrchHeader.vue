@@ -18,13 +18,14 @@ const srchEvent = () => {
     let requestparam;
     if (shosekiForm.value != null && shosekiForm.value !== '') {
         console.log(shosekiForm.value);
-        requestparam = {
+        requestparam = {params:{
             shosekiName: shosekiForm.value,
-            sakushaName: '',
-        }
+            sakushaName: ''
+        }}
         console.log(requestparam);
-        axios.get(srchUrl, {requestparam})
-            .then(response => {
+        //axios.get(srchUrl, {requestparam})
+        axios.get(srchUrl, requestparam)
+        .then(response => {
                 console.log(response);
                 console.log('レスポンスあり');
             })
@@ -37,11 +38,11 @@ const srchEvent = () => {
     }
     if (sakushaForm.value != null && sakushaForm.value !== '') {
         console.log(sakushaForm.value);
-        requestparam = {
-            shosekiName: '',
-            sakushaName: sakushaForm.value,
-        }
-        axios.get(srchUrl, { requestparam })
+        requestparam = { params:{
+                shosekiName: '',
+                sakushaName: sakushaForm.value
+        }}
+        axios.get(srchUrl, requestparam )
             .then(response => {
                 console.log(response);
             })
