@@ -11,6 +11,8 @@ const sakushaForm = ref('');
 const urlTest = 'http://localhost:8010/getTestString';
 // API
 const srchUrl = 'http://localhost:8010/getSrch'
+// 書籍一覧
+const shosekiIchiran = [];
 
 // 検索イベント
 const srchEvent = () => {
@@ -23,7 +25,6 @@ const srchEvent = () => {
             sakushaName: ''
         }}
         console.log(requestparam);
-        //axios.get(srchUrl, {requestparam})
         axios.get(srchUrl, requestparam)
         .then(response => {
                 console.log(response);
